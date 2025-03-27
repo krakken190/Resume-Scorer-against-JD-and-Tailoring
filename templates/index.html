@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Matcher and Tailoring</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Matcher and Tailoring</h1>
+        <div class="main-content">
+            <div class="input-section">
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="job_description">Paste Job Description:</label>
+                        <textarea id="job_description" name="job_description" rows="10" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="resume_file">Upload Resume (docx, txt, pdf):</label>
+                        <input type="file" id="resume_file" name="resume_file" accept=".docx, .txt, .pdf" required>
+                    </div>
+                    <button type="submit" class="button">Analyze Resume</button>
+                </form>
+            </div>
+            <div class="results-section">
+                {% if match_percentage %}
+                <h2>Analysis Results</h2>
+                <div class="percentage-bar-container">
+                    <div class="percentage-bar" style="width: '{{ match_percentage }}%';">
+                        <span class="percentage-text">{{ match_percentage }}%</span>
+                    </div>
+                </div>
+                    {% if "good match" in suggestions.lower() %}
+                        <p class="success">{{ suggestions }}</p>
+                    {% elif "Error" in match_percentage %}
+                        <p class="error">{{ suggestions }}</p>
+                    {% else %}
+                        <h2>Tailoring Suggestions</h2>
+                        <div class="suggestions-list">
+                            {% for line in suggestions.split('\n') %}
+                                {% if line.strip().startswith('# ') %}
+                                    <h1 class="section-heading">{{ line.strip().replace('# ', '') }}</h1>
+                                {% elif line.strip().startswith('- ') %}
+                                    <li class="suggestion-item">{{ line.strip().replace('- ', '') }}</li>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
