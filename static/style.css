@@ -1,0 +1,212 @@
+/* --- General Reset and Base Styles --- */
+body {
+    font-family: 'Poppins', sans-serif; /* Modern and versatile font */
+    background: linear-gradient(135deg, #f0f2f5 0%, #d4e0e9 100%); /* Subtle gradient background */
+    color: #333;
+    margin: 0;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    padding: 45px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08); /* More pronounced shadow */
+    width: 95%;
+    max-width: 1050px;
+    position: relative; /* For the floating shapes */
+}
+
+h1, h2 {
+    text-align: center;
+    color: #2c3e50; /* Darker, more professional text color */
+    margin-bottom: 30px;
+}
+
+.main-content {
+    display: flex;
+    gap: 40px;
+}
+
+.input-section {
+    flex: 1;
+    padding-right: 40px;
+    border-right: 1px solid #e0e0e0; /* Light gray separator */
+}
+
+.results-section {
+    flex: 1;
+    padding-left: 40px;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #555;
+}
+
+textarea, input[type="file"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #333;
+    background-color: #f7f7f7;
+    transition: border-color 0.3s ease;
+}
+
+textarea:focus, input[type="file"]:focus {
+    border-color: #007bff; /* Highlight on focus */
+}
+
+.button {
+    background-color: #007bff; /* Primary blue */
+    color: white;
+    padding: 14px 22px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 17px;
+    width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px); /* Subtle lift on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.results {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+}
+
+.percentage-bar-container {
+    width: 100%;
+    background-color: #e9ecef; /* Lighter gray */
+    border-radius: 8px;
+    height: 30px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.percentage-bar {
+    height: 100%;
+    background-color: #28a745;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-weight: 600;
+    transition: width 0.5s ease-in-out;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) inset; /* Subtle inner shadow */
+}
+
+.percentage-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.suggestions-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.section-heading {
+    font-size: 1.8em;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.suggestion-item {
+    margin-bottom: 12px;
+    line-height: 1.7;
+    padding-left: 25px;
+    position: relative;
+    color: #495057; /* Slightly darker text */
+}
+
+.suggestion-item::before {
+    content: "\2022";
+    position: absolute;
+    left: 0;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 1.1em;
+    top: 2px; /* Adjust vertical alignment */
+}
+
+.success {
+    color: #28a745;
+    font-weight: 500;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+.error {
+    color: #dc3545;
+    font-weight: 500;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+/* --- Floating Shapes (Example) --- */
+.container::before,
+.container::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+.container::before {
+    width: 80px;
+    height: 80px;
+    background-color: #007bff;
+    top: 20px;
+    left: 20px;
+    animation: float1 5s ease-in-out infinite alternate;
+}
+
+.container::after {
+    width: 60px;
+    height: 60px;
+    background-color: #28a745;
+    bottom: 30px;
+    right: 30px;
+    animation: float2 7s ease-in-out infinite alternate;
+}
+
+@keyframes float1 {
+    0% { transform: translateY(0px) translateX(0px) scale(1); }
+    50% { transform: translateY(-15px) translateX(10px) scale(1.1); }
+    100% { transform: translateY(0px) translateX(0px) scale(1); }
+}
+
+@keyframes float2 {
+    0% { transform: translateY(0px) translateX(0px) scale(0.9); }
+    50% { transform: translateY(20px) translateX(-10px) scale(1); }
+    100% { transform: translateY(0px) translateX(0px) scale(0.9); }
+}
