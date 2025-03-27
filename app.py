@@ -20,7 +20,7 @@ except FileNotFoundError:
 except Exception as e:
     print(f"Error reading API key file: {e}")
 
-# --- Text Extraction Functions (Adapted for Flask) ---
+# --- Text Extraction Functions ---
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
@@ -125,7 +125,7 @@ def analyze_with_gpt(jd_text, resume_text):
             ]
         )
         content = response.choices[0].message.content.strip()
-        print(f"GPT Response Content:\n{content}") # Keep this for debugging
+        print(f"GPT Response Content:\n{content}") # for debugging
 
         match_percentage_str = ""
         suggestions_output = ""
@@ -153,11 +153,10 @@ def analyze_with_gpt(jd_text, resume_text):
         return match_percentage_str, suggestions_output
 
     except openai.OpenAIError as e:
-        # Replace st.error with a Flask-friendly way to handle errors
         print(f"OpenAI API error: {e}")
         return f"OpenAI API error: {e}", ""
 
-# --- Main Analysis Function (Flask) ---
+# --- Main Analysis Function ---
 @app.route('/', methods=['GET', 'POST'])
 def index():
     match_percentage = None
@@ -169,11 +168,10 @@ def index():
 
         if jd_text and resume_file and allowed_file(resume_file.filename):
             try:
-                # Save the uploaded file temporarily
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], resume_file.filename)
                 resume_file.save(filepath)
                 resume_text = extract_text_from_file(filepath)
-                os.remove(filepath) # Remove the temporary file
+                os.remove(filepath) 
 
                 if "Error reading" in resume_text or "Unsupported file format." in resume_text:
                     match_percentage = "Error"
