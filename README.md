@@ -1,3 +1,7 @@
+
+https://github.com/user-attachments/assets/76d6c5f3-e07f-4a1d-881a-a7aee7206efe
+Uploading Resume Tailoring.mp4…
+
 # Resume Matcher and Tailoring Application
 
 This project is a web application built using the Flask framework to help users analyze their resumes against job descriptions and receive tailored suggestions for improvement.
