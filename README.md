@@ -1,6 +1,5 @@
+https://github.com/user-attachments/assets/0e420e28-2df2-461a-ade1-09b0522d05ef
 
-https://github.com/user-attachments/assets/76d6c5f3-e07f-4a1d-881a-a7aee7206efe
-Uploading Resume Tailoring.mp4…
 
 # Resume Matcher and Tailoring Application
 
