@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -27,14 +27,17 @@
                     <button type="submit" class="button">Analyze Resume</button>
                 </form>
             </div>
+
             <div class="results-section">
                 {% if match_percentage %}
-                <h2>Analysis Results</h2>
-                <div class="percentage-bar-container">
-                    <div class="percentage-bar" style="width: '{{ match_percentage }}%';">
-                        <span class="percentage-text">{{ match_percentage }}%</span>
+                    <div class="result-container">
+                        <h2>Match Result</h2>
+                        <div class="progress-container">
+                            <div class="percentage-bar" id="progressBar"></div>
+                        </div>
+                        <div class="percentage-label">{{ match_percentage }}% match</div>
                     </div>
-                </div>
+
                     {% if "good match" in suggestions.lower() %}
                         <p class="success">{{ suggestions }}</p>
                     {% elif "Error" in match_percentage %}
@@ -55,5 +58,15 @@
             </div>
         </div>
     </div>
+
+    {% if match_percentage %}
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const bar = document.getElementById('progressBar');
+            const percent = parseFloat("{{ match_percentage }}");
+            bar.style.width = percent + '%';
+        });
+    </script>
+    {% endif %}
 </body>
 </html>
